@@ -1,9 +1,7 @@
-package project.customers;
-import java.util.Scanner;
+package project.users;
 
+public class BankAdmin implements Users {
 
-public class Customer {
-	
 	public String userName;
 	public String passWord;
 	public String firstName;
@@ -11,12 +9,12 @@ public class Customer {
 	public String address;
 	
 	
-	public Customer() {
-		
+	public BankAdmin() {
+		super();
 	}
 
 
-	public Customer(String userName, String passWord, String firstName, String lastName, String address) {
+	public BankAdmin(String userName, String passWord, String firstName, String lastName, String address) {
 		super();
 		this.userName = userName;
 		this.passWord = passWord;
@@ -129,15 +127,10 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [userName=" + userName + ", passWord=" + passWord + ", firstName=" + firstName + ", lastName="
+		return "Bank Admin [userName=" + userName + ", passWord=" + passWord + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", address=" + address + "]";
 	}
 
 
 	
-	
-	
-	
-	
-
 }

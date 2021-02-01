@@ -2,7 +2,7 @@ package project.service;
 
 import java.util.Scanner;
 
-import project.customers.Customer;
+import project.users.Customer;
 
 public class userService {
 

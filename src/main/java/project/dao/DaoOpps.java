@@ -3,9 +3,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
-import project.customers.*;
+
 import project.accounts.*;
 import project.connectionUtil.Connections;
+import project.users.*;
 
 public class DaoOpps {
 	

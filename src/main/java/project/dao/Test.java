@@ -9,5 +9,8 @@ public class Test {
 	Connection conn = Connections.getConnection();
 }
 
-	
+	@Test
+	public void addTest() {
+		
+	}
 }
