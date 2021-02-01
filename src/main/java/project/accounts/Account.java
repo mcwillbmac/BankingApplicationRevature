@@ -2,7 +2,21 @@ package project.accounts;
 
 public class Account {
 
-private static double accountBalance;
+	
+	private int accId; 
+	private int usrId; 
+	private int accType; 
+	private int active; 
+	private static double accountBalance;
+	
+	public Account(int accId, int usrId, int accType, int active) {
+		super();
+		this.accId = accId;
+		this.usrId = usrId;
+		this.accType = accType;
+		this.active = active;
+	}
+	
 	
 	
 	
