@@ -1,18 +1,63 @@
 package project.accounts;
 
-public interface Account {
+public class Account {
 
-public static double accountBalance = 0;
+private static double accountBalance;
 	
 	
 	
-     abstract double withdraw(double d);
-	 abstract void deposit(double d);
-	 abstract void setAccountBalance(double i);
-	 abstract double getAccountBalance();
-	 abstract double transfer(double d);
+public void setAccountBalance(double ab) {
+	accountBalance = ab;
+}
+
+public double getAccountBalance() {
+	return accountBalance;
+}
+
+public double withdraw(double amount) {
 	
+	if(accountBalance <= 0) {
+		System.out.println("Insuffient funds");
+	}
+	else if(amount > accountBalance) {
+		System.out.println("Not enough funds");
+	}
+	else {
+		
+		double balanceAmount = accountBalance - amount;
+		setAccountBalance(balanceAmount);
+		System.out.println("Account balance: "+ balanceAmount);
+	}
 	
+	return amount;
+}
+
+
+ public void deposit(double depositAmount) {
+	
+	double afterDepositBalance = accountBalance + depositAmount;
+	setAccountBalance(afterDepositBalance);
+	String show =  Double.toString(afterDepositBalance);
+	System.out.println("Account balance: "+ show);
 	
 }
+ public double transfer(double transfer) {
+	 
+	 double transTotal = accountBalance + transfer;
+	 setAccountBalance(transTotal);
+	 System.out.println("Account Balance: "+ transTotal);
+	 
+	 
+	 return transTotal;
+	 
+ }
+
+
+
+}
+
+	
+	
+	
+
 
