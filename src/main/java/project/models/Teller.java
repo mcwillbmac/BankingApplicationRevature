@@ -1,26 +1,51 @@
-package project.users;
+package project.models;
 
-public class BankAdmin implements Users {
-
-	public String userName;
-	public String passWord;
-	public String firstName;
-	public String lastName;
-	public String address;
+public class Teller extends User{
+	
+	public int id;
+	private String userName;
+	private String passWord;
+	private String firstName;
+	private String lastName;
+	private String address;
+	private Role role;
 	
 	
-	public BankAdmin() {
+	public Teller() {
 		super();
 	}
 
 
-	public BankAdmin(String userName, String passWord, String firstName, String lastName, String address) {
+	public Teller(int id, String userName, String passWord, String firstName, String lastName, String address,
+			Role role) {
 		super();
+		this.id = id;
 		this.userName = userName;
 		this.passWord = passWord;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
+		this.role = role;
+	}
+	
+
+	public Teller(Object userName, Object passWord, Object firstName, Object lastName, Object address,
+			Role role) {
+		// TODO Auto-generated constructor stub
+		this.userName = (String) userName;
+		this.passWord = (String) passWord;
+		this.firstName = (String) firstName;
+		this.lastName = (String) lastName;
+		this.address = (String) address;
+		this.role = role;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
@@ -72,16 +97,26 @@ public class BankAdmin implements Users {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public Role getRole() {
+		return role;
+	}
+
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((passWord == null) ? 0 : passWord.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
@@ -91,11 +126,11 @@ public class BankAdmin implements Users {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Customer other = (Customer) obj;
+		Teller other = (Teller) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;
@@ -106,6 +141,8 @@ public class BankAdmin implements Users {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
+		if (id != other.id)
+			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
@@ -115,6 +152,11 @@ public class BankAdmin implements Users {
 			if (other.passWord != null)
 				return false;
 		} else if (!passWord.equals(other.passWord))
+			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
 			return false;
 		if (userName == null) {
 			if (other.userName != null)
@@ -127,10 +169,14 @@ public class BankAdmin implements Users {
 
 	@Override
 	public String toString() {
-		return "Bank Admin [userName=" + userName + ", passWord=" + passWord + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", address=" + address + "]";
+		return "Teller [id=" + id + ", userName=" + userName + ", passWord=" + passWord + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", address=" + address + ", role=" + role + "]";
 	}
 
 
+
 	
+
+	
+
 }

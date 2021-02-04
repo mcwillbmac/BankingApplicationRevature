@@ -1,78 +1,61 @@
-package project.users;
+package project.models;
 
-public class Employee implements Users{
-	
-	public String userName;
-	public String passWord;
-	public String firstName;
-	public String lastName;
-	public String address;
-	
-	
-	public Employee() {
-		super();
+public abstract class User {
+
+	private int id;
+	private String userName;
+	private String passWord;
+	private String firstName;
+	private String lastName;
+	private String address;
+
+	public int getId() {
+		return id;
 	}
 
-
-	public Employee(String userName, String passWord, String firstName, String lastName, String address) {
-		super();
-		this.userName = userName;
-		this.passWord = passWord;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
+	public void setId(int id) {
+		this.id = id;
 	}
-
 
 	public String getUserName() {
 		return userName;
 	}
 
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 
 	public String getPassWord() {
 		return passWord;
 	}
 
-
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
-
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 
 	public String getLastName() {
 		return lastName;
 	}
 
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 
 	public String getAddress() {
 		return address;
 	}
 
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -80,12 +63,12 @@ public class Employee implements Users{
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((passWord == null) ? 0 : passWord.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -95,7 +78,7 @@ public class Employee implements Users{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Customer other = (Customer) obj;
+		User other = (User) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;
@@ -105,6 +88,8 @@ public class Employee implements Users{
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (id != other.id)
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -124,14 +109,10 @@ public class Employee implements Users{
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Employee [userName=" + userName + ", passWord=" + passWord + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", address=" + address + "]";
+		return "User [id=" + id + ", userName=" + userName + ", passWord=" + passWord + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", address=" + address + "]";
 	}
-
-
-	
 
 }
