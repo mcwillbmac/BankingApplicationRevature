@@ -1,129 +1,219 @@
 package project.dao;
+
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import project.connectionUtil.Connections;
 import project.models.*;
 
 public class DaoOpps implements DaoInterface {
-	
-	public int insert(User u) {
+
+	public int insertT(Teller u) {
 
 		try {
-			
+
 			Connection conn = Connections.getConnection();
 
-			
-			String columns = "first_name, last_name ,user_name ,password ,address";
-			String sql = "INSERT INTO users (" + columns + ") VALUES (?, ?, ?, ?, ?)";
-			
+			String columns = "first_name, last_name ,address, user_name ,pass, role_id";
+			String sql = "INSERT INTO employee (" + columns + ") VALUES (?, ?, ?, ?, ?, ?)";
 
-			// Step 3a: Obtain Statement Object
-			// PreparedStatement is a sub interface of Statement that provides extra
-			// security to prevent SQL injection.
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
-			// Step 3b: Inject values to replace all the ? marks
-			stmt.setString(1, u.getUserName()); // replace 1st ? mark with u.getUsername()
-			stmt.setString(2, u.getPassWord()); // replace 2nd ? mark with u.getPassword()
-			stmt.setString(3, u.getFirstName()); // replace 3rd ? mark with u.getFirstName()
-			stmt.setString(4, u.getLastName());
-			stmt.setString(5, u.getAddress());
-			 // this is returning the int value for the Role id of the Role object
-
-			// Step 4: Execute the statement;
-			return stmt.executeUpdate(); // this will return the number of statements executed (1)
+			stmt.setString(1, u.getFirstName()); 
+			stmt.setString(2, u.getLastName()); 
+			stmt.setString(3, u.getAddress()); 
+			stmt.setString(4, u.getUserName());
+			stmt.setString(5, u.getPassWord());
+			stmt.setInt(6, u.getRole().getId());
+			
+			return stmt.executeUpdate(); 
 
 		} catch (SQLException e) {
-			// Step 5: Perform any exception handling in an appropriate means
+			
 			e.printStackTrace();
 		}
 
-		// otherwise we return 0 if we cannot insert a row into the database
 		return 0;
 	}
-	
+
 	public int insertC(Customer u) {
 
 		try {
-			
+
 			Connection conn = Connections.getConnection();
 
-			
-			String columns = "id,first_name, last_name ,user_name ,pass ,address";
-			String sql = "INSERT INTO customers (" + columns + ") VALUES (?, ?, ?, ?, ?, ?)";
-			
+			String columns = "first_name, last_name ,address ,user_name, pass, role_id";
+			String sql = "INSERT INTO customers (" + columns + ") VALUES (?, ?, ?, ?, ?,?)";
 
-			// Step 3a: Obtain Statement Object
-			// PreparedStatement is a sub interface of Statement that provides extra
-			// security to prevent SQL injection.
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
-			// Step 3b: Inject values to replace all the ? marks
-			stmt.setInt(1, u.getId());
-			stmt.setString(2, u.getFirstName()); // replace 1st ? mark with u.getUsername()
-			stmt.setString(3, u.getLastName()); // replace 2nd ? mark with u.getPassword()
-			stmt.setString(4, u.getUserName()); // replace 3rd ? mark with u.getFirstName()
+			stmt.setString(1, u.getFirstName()); 
+			stmt.setString(2, u.getLastName()); 
+			stmt.setString(3, u.getAddress()); 
+			stmt.setString(4, u.getUserName());
 			stmt.setString(5, u.getPassWord());
-			stmt.setString(6, u.getAddress());
-			 
+			stmt.setInt(6, u.getRole().getId());
 
-			// Step 4: Execute the statement;
-			return stmt.executeUpdate(); // this will return the number of statements executed (1)
+			return stmt.executeUpdate(); 
 
 		} catch (SQLException e) {
-			// Step 5: Perform any exception handling in an appropriate means
+			
 			e.printStackTrace();
 		}
 
-		// otherwise we return 0 if we cannot insert a row into the database
 		return 0;
 	}
-	
+
 	public int insertB(BankAdmin u) {
 
 		try {
-			
+
 			Connection conn = Connections.getConnection();
 
-			
-			String columns = "id,first_name, last_name ,user_name ,password ,address";
-			String sql = "INSERT INTO customers (" + columns + ") VALUES (?, ?, ?, ?, ?, ?)";
-			
+			String columns = "first_name, last_name ,address, user_name ,pass, role_id";
+			String sql = "INSERT INTO employee (" + columns + ") VALUES (?, ?, ?, ?, ?, ?)";
 
-			// Step 3a: Obtain Statement Object
-			// PreparedStatement is a sub interface of Statement that provides extra
-			// security to prevent SQL injection.
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
-			// Step 3b: Inject values to replace all the ? marks
-			stmt.setInt(1, u.getId());
-			stmt.setString(2, u.getUserName()); // replace 1st ? mark with u.getUsername()
-			stmt.setString(3, u.getPassWord()); // replace 2nd ? mark with u.getPassword()
-			stmt.setString(4, u.getFirstName()); // replace 3rd ? mark with u.getFirstName()
-			stmt.setString(5, u.getLastName());
-			stmt.setString(6, u.getAddress());
-			 // this is returning the int value for the Role id of the Role object
-
-			// Step 4: Execute the statement;
-			return stmt.executeUpdate(); // this will return the number of statements executed (1)
+			stmt.setString(1, u.getFirstName()); 
+			stmt.setString(2, u.getLastName()); 
+			stmt.setString(3, u.getAddress()); 
+			stmt.setString(4, u.getUserName());
+			stmt.setString(5, u.getPassWord());
+			stmt.setInt(6, u.getRole().getId());
+			
+			return stmt.executeUpdate(); 
 
 		} catch (SQLException e) {
-			// Step 5: Perform any exception handling in an appropriate means
+			
 			e.printStackTrace();
 		}
 
-		// otherwise we return 0 if we cannot insert a row into the database
 		return 0;
 	}
-	
-
-	
 
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<Customer> findAllC() {
+		
+		List<Customer> allUsers = new ArrayList<Customer>();
+
+		Connection conn = Connections.getConnection();
+		String sql = "SELECT * FROM customers INNER JOIN roles ON customers.role_id = roles.id";
+
+		try {
+			Statement stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String firstName = rs.getString("first_name"); 
+				String lastName = rs.getString("last_name");
+				String address = rs.getString("address");
+				String userName = rs.getString("user_name");
+				String pass = rs.getString("pass");
+				int roleId = rs.getInt("role_id");
+				String roleName = rs.getString("role_name");
+
+				Role r = new Role(roleId, roleName);
+				Customer c= new Customer(id, firstName,lastName,address,userName,pass,r);
+
+				allUsers.add(c);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		
+			return new ArrayList<Customer>();	
+		}
+
+		return allUsers;
+	}
+
+	public List<Teller> findAllT() {
+		
+		List<Teller> allUsers = new ArrayList<Teller>();
+
+		Connection conn = Connections.getConnection();
+		String sql = "SELECT * FROM employee INNER JOIN roles ON employee.role_id = roles.id";
+
+		try {
+			Statement stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String firstName = rs.getString("first_name"); 
+				String lastName = rs.getString("last_name");
+				String address = rs.getString("address");
+				String userName = rs.getString("user_name");
+				String pass = rs.getString("pass");
+				int roleId = rs.getInt("role_id");
+				String roleName = rs.getString("role_name");
+
+				Role r = new Role(roleId, roleName);
+				Teller c= new Teller(id, firstName,lastName,address,userName,pass,r);
+
+				allUsers.add(c);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		
+			return new ArrayList<Teller>();	
+		}
+
+		return allUsers;
+	}
+
+	public List<BankAdmin> findAllB() {
+		
+		List<BankAdmin> allUsers = new ArrayList<BankAdmin>();
+
+		Connection conn = Connections.getConnection();
+		String sql = "SELECT * FROM employee INNER JOIN roles ON employee.role_id = roles.id";
+
+		try {
+			Statement stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String firstName = rs.getString("first_name"); 
+				String lastName = rs.getString("last_name");
+				String address = rs.getString("address");
+				String userName = rs.getString("user_name");
+				String pass = rs.getString("pass");
+				int roleId = rs.getInt("role_id");
+				String roleName = rs.getString("role_name");
+
+				Role r = new Role(roleId, roleName);
+				BankAdmin c= new BankAdmin(id, firstName,lastName,address,userName,pass,r);
+
+				allUsers.add(c);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		
+			return new ArrayList<BankAdmin>();	
+		}
+
+		return allUsers;
 	}
 
 	public User findById(int id) {
@@ -135,6 +225,110 @@ public class DaoOpps implements DaoInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public Customer findByUsernameC(String username) {
+		
+		Customer u = new Customer();
+
+		Connection conn = Connections.getConnection();
+		
+		String sql = "SELECT * FROM customers INNER JOIN roles ON customers.role_id = roles.id WHERE customers.user_name = ? ";
+
+		try {
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				u.setId(rs.getInt(1));
+				u.setFirstName(username); 
+				u.setLastName(rs.getString(3));
+				u.setAddress(rs.getString(4)); 
+				u.setUserName(rs.getString(5));
+				u.setPassWord(rs.getString(6));
+				u.setRole(new Role(rs.getInt("role_id"), rs.getString("role_name"))); 
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+			return null;
+		}
+
+		return u;
+		
+	}
+
+	public Teller findByUsernameT(String username) {
+		
+		Teller u = new Teller();
+
+		Connection conn = Connections.getConnection();
+		
+		String sql = "SELECT * FROM employee INNER JOIN roles ON employee.role_id = roles.id WHERE employee.user_name = ? ";
+
+		try {
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				u.setId(rs.getInt(1));
+				u.setFirstName(username); 
+				u.setLastName(rs.getString(3));
+				u.setAddress(rs.getString(4)); 
+				u.setUserName(rs.getString(5));
+				u.setPassWord(rs.getString(6));
+				u.setRole(new Role(rs.getInt("role_id"), rs.getString("role_name"))); 
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+			return null;
+		}
+
+		return u;
+		
+	}
+
+	public BankAdmin findByUsernameB(String username) {
+		
+		BankAdmin u = new BankAdmin();
+
+		Connection conn = Connections.getConnection();
+		
+		String sql = "SELECT * FROM employee INNER JOIN roles ON employee.role_id = roles.id WHERE employee.user_name = ? ";
+
+		try {
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				u.setId(rs.getInt(1));
+				u.setFirstName(username); 
+				u.setLastName(rs.getString(3));
+				u.setAddress(rs.getString(4)); 
+				u.setUserName(rs.getString(5));
+				u.setPassWord(rs.getString(6));
+				u.setRole(new Role(rs.getInt("role_id"), rs.getString("role_name"))); 
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+			return null;
+		}
+
+		return u;
+		
+	}
 
 	public int update(User u) {
 		// TODO Auto-generated method stub
@@ -142,6 +336,11 @@ public class DaoOpps implements DaoInterface {
 	}
 
 	public int delete(User u) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int insert(User u) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

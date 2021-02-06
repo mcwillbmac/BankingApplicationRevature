@@ -16,27 +16,29 @@ public class Teller extends User{
 	}
 
 
-	public Teller(int id, String userName, String passWord, String firstName, String lastName, String address,
+	public Teller(int id,String firstName, String lastName, String address, String userName, String passWord, 
 			Role role) {
 		super();
 		this.id = id;
-		this.userName = userName;
-		this.passWord = passWord;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
+		this.userName = userName;
+		this.passWord = passWord;
 		this.role = role;
 	}
 	
 
-	public Teller(Object userName, Object passWord, Object firstName, Object lastName, Object address,
-			Role role) {
-		// TODO Auto-generated constructor stub
-		this.userName = (String) userName;
-		this.passWord = (String) passWord;
-		this.firstName = (String) firstName;
-		this.lastName = (String) lastName;
-		this.address = (String) address;
+	
+
+
+	public Teller(String firstName, String lastName, String address, String userName, String passWord, Role role) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.userName = userName;
+		this.passWord = passWord;
 		this.role = role;
 	}
 

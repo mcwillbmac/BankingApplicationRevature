@@ -2,36 +2,41 @@ package project.models;
 
 public class Customer extends User {
 
-	static public int id;
+	private int id;
 	private String userName;
 	private String passWord;
 	private String firstName;
 	private String lastName;
 	private String address;
+	private Role role;
 
 	public Customer() {
 		super();
 	}
 
-	public Customer(int id, String userName, String passWord, String firstName, String lastName, String address) {
+	public Customer(int id, String firstName, String lastName, String address, String userName, String passWord, 
+			Role role) {
 		super();
 		this.id = id;
-		this.userName = userName;
-		this.passWord = passWord;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
-	}
-	public Customer(int id,Object userName, Object passWord, Object firstName, Object lastName, Object address) {
-		// TODO Auto-generated constructor stub
-		this.id = id;
-		this.userName = (String) userName;
-		this.passWord = (String) passWord;
-		this.firstName = (String) firstName;
-		this.lastName = (String) lastName;
-		this.address = (String) address;
+		this.userName = userName;
+		this.passWord = passWord;
+		
+		this.role = role;
 	}
 
+	public Customer(String firstName, String lastName, String address, String userName, String passWord, Role role) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.userName = userName;
+		this.passWord = passWord;
+		
+		this.role = role;
+	}
 
 	public int getId() {
 		return id;
@@ -81,6 +86,14 @@ public class Customer extends User {
 		this.address = address;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,6 +103,7 @@ public class Customer extends User {
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((passWord == null) ? 0 : passWord.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
@@ -125,6 +139,11 @@ public class Customer extends User {
 				return false;
 		} else if (!passWord.equals(other.passWord))
 			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
 		if (userName == null) {
 			if (other.userName != null)
 				return false;
@@ -136,7 +155,7 @@ public class Customer extends User {
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", userName=" + userName + ", passWord=" + passWord + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", address=" + address + "]";
+				+ ", lastName=" + lastName + ", address=" + address + ", role=" + role + "]";
 	}
 
 }

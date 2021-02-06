@@ -14,26 +14,27 @@ public class BankAdmin extends User {
 		super();
 	}
 
-	public BankAdmin(int id, String userName, String passWord, String firstName, String lastName, String address,
+	public BankAdmin(int id, String firstName, String lastName, String address, String userName, String passWord, 
 			Role role) {
 		super();
 		this.id = id;
-		this.userName = userName;
-		this.passWord = passWord;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
+		this.userName = userName;
+		this.passWord = passWord;
+		
 		this.role = role;
 	}
 	
-	public BankAdmin(Object userName, Object passWord, Object firstName, Object lastName, Object address,
-			Role role) {
-		// TODO Auto-generated constructor stub
-		this.userName = (String) userName;
-		this.passWord = (String) passWord;
-		this.firstName = (String) firstName;
-		this.lastName = (String) lastName;
-		this.address = (String) address;
+	
+	public BankAdmin(String firstName, String lastName, String address, String userName, String passWord, Role role) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.userName = userName;
+		this.passWord = passWord;
 		this.role = role;
 	}
 
