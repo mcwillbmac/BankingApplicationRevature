@@ -3,7 +3,10 @@ package project.models;
 public class Checking extends Account {
 
 	boolean open;
-
+	
+	public Checking() {
+		
+	}
 	
 	public Checking(int accId, int usrId, int accType, double accountBalance) {
 		super(accId, usrId, accType, accountBalance);

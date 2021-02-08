@@ -23,8 +23,9 @@ public class Test {
 	 */
 	
 	  userService us = new userService(); 
-	  us.register();
-	 
+	  
+	  us.returnAllUsersC();
+;	 
 	 
 }
 

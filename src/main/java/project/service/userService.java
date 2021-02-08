@@ -50,6 +50,14 @@ public class userService {
 				System.out.println(accountInfo);
 				Customer cust = new Customer(cus.getFirstName(), cus.getLastName(), cus.getAddress(), cus.getUserName(),
 						cus.getPassWord(), ro);
+				System.out.println("Set account balance.");
+				Scanner s = new Scanner(System.in);
+				double balance = s.nextDouble();
+				Account ac = new Checking();
+				ac.setAccountBalance(balance);
+				
+				
+				
 				System.out.println(dao.insertC(cust));
 
 				System.out.println(us.returnAllUsersC());
@@ -158,6 +166,32 @@ public class userService {
 		if (r.getPassWord().equals(u.getPassWord())) {
 
 			System.out.println("you are logged in!");
+			
+			System.out.println("What would you like to do? [1] to withdraw, [2] to deposit, or [3] to check balance. ");
+			
+		int chh = sc.nextInt();
+		
+		if(chh == 1) {
+			
+			System.out.println("Which account would you want to withdraw from? [1] for checking or [2] for savings.  ");
+			
+			int chhh = sc.nextInt();
+			
+			if(chhh == 1) {
+				
+				Account ac = new Checking();
+				
+				
+			}
+			
+			
+		}else if(chh == 2) {
+			
+			
+		}else if(chh == 3) {
+			
+			
+		} 
 
 		} else {
 
@@ -212,29 +246,50 @@ public class userService {
 
 		return dao.insert(u);
 	}
+	public int add(Customer u) {
+
+		return dao.insertC(u);
+	}
+	public int add(Teller u) {
+
+		return dao.insertT(u);
+	}
+	public int add(BankAdmin u) {
+
+		return dao.insertB(u);
+	}
 
 	public List<User> returnAllUsers() {
 
 		return dao.findAll();
 	}
+	
 	public List<Customer> returnAllUsersC() {
 
 		return dao.findAllC();
 	}
+	
 	public List<Teller> returnAllUsersT() {
 
 		return dao.findAllT();
 	}
+	
 	public List<BankAdmin> returnAllUsersB() {
 
 		return dao.findAllB();
 	}
 
-
-
-
 	public User returnAUserById(int id) {
 		return dao.findById(id);
+	}
+	public Customer returnAUserByIdC(int id) {
+		return dao.findByIdC(id);
+	}
+	public Teller returnAUserByIdT(int id) {
+		return dao.findByIdT(id);
+	}
+	public BankAdmin returnAUserByIdB(int id) {
+		return dao.findByIdB(id);
 	}
 
 }
