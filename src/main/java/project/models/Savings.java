@@ -4,8 +4,18 @@ public class Savings extends Account {
 
 	boolean open;
 
-	public Savings(int accId, int usrId, int accType, double accountBalance) {
-		super(accId, usrId, accType, accountBalance);
+	public Savings() {
+		super();
+	}
+
+
+	public Savings(int usrId, int accType, double accountBalance) {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Savings(int accType, double accountBalance) {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 

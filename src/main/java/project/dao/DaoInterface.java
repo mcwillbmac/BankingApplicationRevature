@@ -12,6 +12,10 @@ public interface DaoInterface {
 	public int insertB(BankAdmin ba);
 	
 	public int insertT(Teller tell);
+	
+	public int insertCheck(Checking u);
+	
+	public int insertSaving(Savings u);
 
 	public List<User> findAll();
 	

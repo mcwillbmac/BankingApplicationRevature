@@ -102,6 +102,54 @@ public class DaoOpps implements DaoInterface {
 		return 0;
 	}
 
+	public int insertCheck(Checking u) {
+
+		try {
+
+			Connection conn = Connections.getConnection();
+
+			String columns = "acc_type, balance";
+			String sql = "INSERT INTO account (" + columns + ") VALUES (?, ?,)";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setInt(1, u.getAccType());
+			stmt.setDouble(2, u.getAccountBalance());
+
+			return stmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
+	public int insertSaving(Savings u) {
+
+		try {
+
+			Connection conn = Connections.getConnection();
+
+			String columns = "acc_type, balance";
+			String sql = "INSERT INTO account (" + columns + ") VALUES (?, ?,)";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setInt(1, u.getAccType());
+			stmt.setDouble(2, u.getAccountBalance());
+
+			return stmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		return null;
@@ -438,9 +486,9 @@ public class DaoOpps implements DaoInterface {
 	}
 
 	public int updateC(Customer u) {
-		
+
 		Customer c = new Customer();
-		
+
 		return 0;
 	}
 

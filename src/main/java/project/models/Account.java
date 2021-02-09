@@ -3,32 +3,31 @@ package project.models;
 
 public class Account {
 
-	private int accId;
-	private int userId;
-	private int accType;
-	private int active;
+	
+	protected int userId;
+	protected int accType;
 	protected static double accountBalance;
 	
 	public Account() {
 		
 		
 	}
-
-	public Account(int accId, int userId, int accType, double accountBalance) {
+	public Account( int accType, double accountBalance) {
 		super();
-		this.accId = accId;
+		this.accType = accType;
+		this.accountBalance = accountBalance;
+	}
+
+	
+
+	public Account( int userId, int accType, double accountBalance) {
+		super();
+		
 		this.userId = userId;
 		this.accType = accType;
 		this.accountBalance = accountBalance;
 	}
 
-	public int getAccId() {
-		return accId;
-	}
-
-	public void setAccId(int accId) {
-		this.accId = accId;
-	}
 
 	public int getUsrId() {
 		return userId;
@@ -46,13 +45,6 @@ public class Account {
 		this.accType = accType;
 	}
 
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
-	}
 
 	public void setAccountBalance(double ab) {
 		accountBalance = ab;
@@ -102,12 +94,10 @@ public class Account {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + accId;
 		result = prime * result + accType;
 		long temp;
 		temp = Double.doubleToLongBits(accountBalance);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + active;
 		result = prime * result + userId;
 		return result;
 	}
@@ -121,13 +111,9 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
-		if (accId != other.accId)
-			return false;
 		if (accType != other.accType)
 			return false;
 		if (Double.doubleToLongBits(accountBalance) != Double.doubleToLongBits(other.accountBalance))
-			return false;
-		if (active != other.active)
 			return false;
 		if (userId != other.userId)
 			return false;
@@ -136,8 +122,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [accId=" + accId + ", userId=" + userId + ", accType=" + accType + ", active=" + active
-				+ ", accountBalance=" + accountBalance + "]";
+		return "Account [ userId=" + userId + ", accType=" + accType + " accountBalance=" + accountBalance + "]";
 	}
 
 }

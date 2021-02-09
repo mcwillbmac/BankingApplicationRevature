@@ -8,7 +8,7 @@ import project.dao.*;
 public class userService {
 
 	public static void register() {
-		
+
 		DaoInterface dao = new DaoOpps();
 		userService us = new userService();
 		System.out.println("Welcome to the Moon Rocket Bank!!!!! ");
@@ -46,18 +46,41 @@ public class userService {
 				String accountInfo = new String();
 				accountInfo = cus.getFirstName() + " " + cus.getLastName() + " " + cus.getAddress() + " "
 						+ cus.getUserName() + " " + ro.getName();
-				sc.close();
+
 				System.out.println(accountInfo);
 				Customer cust = new Customer(cus.getFirstName(), cus.getLastName(), cus.getAddress(), cus.getUserName(),
 						cus.getPassWord(), ro);
-				System.out.println("Set account balance.");
-				Scanner s = new Scanner(System.in);
-				double balance = s.nextDouble();
-				Account ac = new Checking();
-				ac.setAccountBalance(balance);
+				sc.next();
+				System.out.println(
+						"What type of account do you want? [1] for Checking or [2] for Savings ");
+				int x = sc.nextInt();
+				if (x == 1) {
+					sc.next();
+					Account ac = new Checking();
+					ac.setAccType(1);
+					System.out.println("How much would you like to deposit into the account.");
+					double y = sc.nextDouble();
+					ac.setAccountBalance(y);
+					Checking check = new Checking(ac.getAccType(),ac.getAccountBalance());
+					
+					System.out.println(dao.insertCheck(check));
+
+				}else if(x == 2) {
+					sc.next();
+					Account ac = new Savings();
+					ac.setAccType(2);
+					System.out.println("How much would you like to deposit into the account.");
+					double y = sc.nextDouble();
+					ac.setAccountBalance(y);
+					Savings savings = new Savings(ac.getAccType(),ac.getAccountBalance());
+					
+					System.out.println(dao.insertSaving(savings));
+					
+
+				}
 				
 				
-				
+
 				System.out.println(dao.insertC(cust));
 
 				System.out.println(us.returnAllUsersC());
@@ -162,36 +185,33 @@ public class userService {
 		Customer u = dao.findByUsernameC(r.getUserName());
 		System.out.println("Enter your password ");
 		r.setPassWord(sc.nextLine());
-		
+
 		if (r.getPassWord().equals(u.getPassWord())) {
 
 			System.out.println("you are logged in!");
-			
+
 			System.out.println("What would you like to do? [1] to withdraw, [2] to deposit, or [3] to check balance. ");
-			
-		int chh = sc.nextInt();
-		
-		if(chh == 1) {
-			
-			System.out.println("Which account would you want to withdraw from? [1] for checking or [2] for savings.  ");
-			
-			int chhh = sc.nextInt();
-			
-			if(chhh == 1) {
-				
-				Account ac = new Checking();
-				
-				
+
+			int chh = sc.nextInt();
+
+			if (chh == 1) {
+
+				System.out.println(
+						"Which account would you want to withdraw from? [1] for checking or [2] for savings.  ");
+
+				int chhh = sc.nextInt();
+
+				if (chhh == 1) {
+
+					Account ac = new Checking();
+
+				}
+
+			} else if (chh == 2) {
+
+			} else if (chh == 3) {
+
 			}
-			
-			
-		}else if(chh == 2) {
-			
-			
-		}else if(chh == 3) {
-			
-			
-		} 
 
 		} else {
 
@@ -199,6 +219,7 @@ public class userService {
 		}
 
 	}
+
 	public static void loginT(Teller r) {
 
 		System.out.println("Enter your user name. ");
@@ -207,7 +228,7 @@ public class userService {
 		Teller u = dao.findByUsernameT(r.getUserName());
 		System.out.println("Enter your password ");
 		r.setPassWord(sc.nextLine());
-		
+
 		if (r.getPassWord().equals(u.getPassWord())) {
 
 			System.out.println("you are logged in!");
@@ -218,6 +239,7 @@ public class userService {
 		}
 
 	}
+
 	public static void loginB(BankAdmin r) {
 
 		// 1. Let's assign a User u equal to the User that the findByUSername method
@@ -230,7 +252,7 @@ public class userService {
 		BankAdmin u = dao.findByUsernameB(r.getUserName());
 		System.out.println("Enter your password ");
 		r.setPassWord(sc.nextLine());
-		
+
 		if (r.getPassWord().equals(u.getPassWord())) {
 
 			System.out.println("you are logged in!");
@@ -246,14 +268,17 @@ public class userService {
 
 		return dao.insert(u);
 	}
+
 	public int add(Customer u) {
 
 		return dao.insertC(u);
 	}
+
 	public int add(Teller u) {
 
 		return dao.insertT(u);
 	}
+
 	public int add(BankAdmin u) {
 
 		return dao.insertB(u);
@@ -263,17 +288,17 @@ public class userService {
 
 		return dao.findAll();
 	}
-	
+
 	public List<Customer> returnAllUsersC() {
 
 		return dao.findAllC();
 	}
-	
+
 	public List<Teller> returnAllUsersT() {
 
 		return dao.findAllT();
 	}
-	
+
 	public List<BankAdmin> returnAllUsersB() {
 
 		return dao.findAllB();
@@ -282,12 +307,15 @@ public class userService {
 	public User returnAUserById(int id) {
 		return dao.findById(id);
 	}
+
 	public Customer returnAUserByIdC(int id) {
 		return dao.findByIdC(id);
 	}
+
 	public Teller returnAUserByIdT(int id) {
 		return dao.findByIdT(id);
 	}
+
 	public BankAdmin returnAUserByIdB(int id) {
 		return dao.findByIdB(id);
 	}

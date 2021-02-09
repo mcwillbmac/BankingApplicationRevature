@@ -3,13 +3,19 @@ package project.models;
 public class Checking extends Account {
 
 	boolean open;
-	
+
 	public Checking() {
-		
+		super();
 	}
-	
-	public Checking(int accId, int usrId, int accType, double accountBalance) {
-		super(accId, usrId, accType, accountBalance);
+
+
+	public Checking(int usrId, int accType, double accountBalance) {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Checking(int accType, double accountBalance) {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
