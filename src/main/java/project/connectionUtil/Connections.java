@@ -8,7 +8,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
+import jdk.internal.org.jline.utils.Log;
+
 public class Connections {
+	
+	
+	private static Logger log = Logger.getLogger(Connection.class);
 	
 	public static Connection getConnection() {
 		
@@ -19,19 +26,25 @@ public class Connections {
 	try {
 		prop.load(new FileReader("C:\\Users\\Mac\\Desktop\\NewSpringTools\\project.revature\\src\\test\\resources\\application.properties"));
 		
-		con = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
+		con = DriverManager.getConnection
+				(prop.getProperty("url"), 
+				prop.getProperty("username"), 
+				prop.getProperty("password"));
 	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
+		
 		e.printStackTrace();
 	} catch (IOException e) {
-		// TODO Auto-generated catch block
+		System.out.println("no connection.");
 		e.printStackTrace();
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
+		
 		e.printStackTrace();
 	}
 	
-	System.out.println("Created");
+	System.out.println("We are live in the database.");
+	System.out.println();
+	System.out.println();
+	
 	return con;
 		
 	}

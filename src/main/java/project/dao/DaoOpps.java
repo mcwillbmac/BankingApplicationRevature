@@ -13,11 +13,6 @@ import project.models.*;
 
 public class DaoOpps implements DaoInterface {
 
-	public int insert(User u) {
-
-		return 0;
-	}
-
 	public int insertT(Teller u) {
 
 		try {
@@ -52,8 +47,8 @@ public class DaoOpps implements DaoInterface {
 
 			Connection conn = Connections.getConnection();
 
-			String columns = "first_name, last_name ,address ,user_name, pass, role_id";
-			String sql = "INSERT INTO customers (" + columns + ") VALUES (?, ?, ?, ?, ?,?)";
+			String columns = "first_name, last_name ,address ,user_name, pass, role_id, balance, acc_type";
+			String sql = "INSERT INTO customers (" + columns + ") VALUES (?, ?, ?, ?, ?,?,?,?)";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -63,6 +58,8 @@ public class DaoOpps implements DaoInterface {
 			stmt.setString(4, u.getUserName());
 			stmt.setString(5, u.getPassWord());
 			stmt.setInt(6, u.getRole().getId());
+			stmt.setDouble(7, u.getBalance());
+			stmt.setInt(8, u.getAccType());
 
 			return stmt.executeUpdate();
 
@@ -102,59 +99,6 @@ public class DaoOpps implements DaoInterface {
 		return 0;
 	}
 
-	public int insertCheck(Checking u) {
-
-		try {
-
-			Connection conn = Connections.getConnection();
-
-			String columns = "acc_type, balance";
-			String sql = "INSERT INTO account (" + columns + ") VALUES (?, ?,)";
-
-			PreparedStatement stmt = conn.prepareStatement(sql);
-
-			stmt.setInt(1, u.getAccType());
-			stmt.setDouble(2, u.getAccountBalance());
-
-			return stmt.executeUpdate();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-		return 0;
-	}
-
-	public int insertSaving(Savings u) {
-
-		try {
-
-			Connection conn = Connections.getConnection();
-
-			String columns = "acc_type, balance";
-			String sql = "INSERT INTO account (" + columns + ") VALUES (?, ?,)";
-
-			PreparedStatement stmt = conn.prepareStatement(sql);
-
-			stmt.setInt(1, u.getAccType());
-			stmt.setDouble(2, u.getAccountBalance());
-
-			return stmt.executeUpdate();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-		return 0;
-	}
-
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public List<Customer> findAllC() {
 
 		List<Customer> allUsers = new ArrayList<Customer>();
@@ -176,9 +120,11 @@ public class DaoOpps implements DaoInterface {
 				String pass = rs.getString("pass");
 				int roleId = rs.getInt("role_id");
 				String roleName = rs.getString("role_name");
+				double balance = rs.getDouble("balance");
+				int accType = rs.getInt("acc_type");
 
 				Role r = new Role(roleId, roleName);
-				Customer c = new Customer(id, firstName, lastName, address, userName, pass, r);
+				Customer c = new Customer(id, firstName, lastName, address, userName, pass, r, balance, accType);
 
 				allUsers.add(c);
 			}
@@ -269,11 +215,6 @@ public class DaoOpps implements DaoInterface {
 		return allUsers;
 	}
 
-	public User findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public Customer findByIdC(int id) {
 
 		Customer u = new Customer();
@@ -294,6 +235,8 @@ public class DaoOpps implements DaoInterface {
 				u.setUserName(rs.getString("user_name"));
 				u.setPassWord(rs.getString("pass"));
 				u.setRole(new Role(rs.getInt("role_id"), rs.getString("role_name")));
+				u.setBalance(rs.getDouble("balance"));
+				u.setAccType(rs.getInt("acc_type"));
 			}
 
 		} catch (SQLException e) {
@@ -370,11 +313,6 @@ public class DaoOpps implements DaoInterface {
 		return u;
 	}
 
-	public User findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public Customer findByUsernameC(String username) {
 
 		Customer u = new Customer();
@@ -397,6 +335,8 @@ public class DaoOpps implements DaoInterface {
 				u.setUserName(rs.getString(5));
 				u.setPassWord(rs.getString(6));
 				u.setRole(new Role(rs.getInt("role_id"), rs.getString("role_name")));
+				u.setBalance(rs.getDouble("balance"));
+				u.setAccType(rs.getInt("acc_type"));
 			}
 
 		} catch (SQLException e) {
@@ -480,32 +420,56 @@ public class DaoOpps implements DaoInterface {
 
 	}
 
-	public int update(User u) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double withdraw(double amount, int customerId) {
+
+		Connection conn = Connections.getConnection();
+
+		String sql = "UPDATE customers SET balance = balance - ? WHERE id = ?";
+
+		try {
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setDouble(1, amount);
+			ps.setInt(2, customerId);
+
+			ps.executeUpdate(); // this is the line that affects the DB
+			// log.info("performed update against DB)
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
+
+		return amount;
+
 	}
 
-	public int updateC(Customer u) {
+	public double deposit(double amount, int customerId) {
 
-		Customer c = new Customer();
+		Connection conn = Connections.getConnection();
 
-		return 0;
+		String sql = "UPDATE customers SET balance = balance + ? WHERE id = ?";
+
+		try {
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setDouble(1, amount);
+			ps.setInt(2, customerId);
+
+			ps.executeUpdate(); // this is the line that affects the DB
+			// log.info("performed update against DB)
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
+
+		return amount;
+
 	}
 
-	public int update(Teller u) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int update(BankAdmin u) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int delete(User u) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	public int delete(Customer u) {
 
@@ -537,9 +501,5 @@ public class DaoOpps implements DaoInterface {
 		return 0;
 	}
 
-	public int update(Customer u) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 }

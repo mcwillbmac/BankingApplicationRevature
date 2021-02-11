@@ -1,0 +1,52 @@
+2021-02-10 21:41:11 WARN  Test:22 - Start of program
+2021-02-10 21:48:37 INFO  userService:23 - This is the start of the registration method.
+2021-02-10 22:36:37 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:38:22 INFO  userService:36 - The user chose customer.
+2021-02-10 22:38:35 INFO  userService:105 - the user chose to login.
+2021-02-10 22:40:19 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:40:29 INFO  userService:36 - The user chose customer.
+2021-02-10 22:40:32 INFO  userService:105 - the user chose to login.
+2021-02-10 22:40:46 INFO  userService:255 - the user is successfully logged in. 
+2021-02-10 22:40:57 INFO  userService:277 - the user is making a deposit.
+2021-02-10 22:41:22 INFO  userService:236 - the user chose to end the program. 
+2021-02-10 22:41:22 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:43:23 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:43:30 INFO  userService:36 - The user chose customer.
+2021-02-10 22:43:31 INFO  userService:105 - the user chose to login.
+2021-02-10 22:43:42 INFO  userService:255 - the user is successfully logged in. 
+2021-02-10 22:43:47 INFO  userService:265 - the user is making a withdraw.
+2021-02-10 22:43:56 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:44:14 INFO  userService:115 - the user chose teller.
+2021-02-10 22:44:20 INFO  userService:123 - here the user chose to create a new teller. 
+2021-02-10 22:44:58 INFO  userService:154 - the teller is being put into the database.
+2021-02-10 22:44:58 INFO  userService:158 - here all tellers are being returned.
+2021-02-10 22:47:28 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:47:31 INFO  userService:36 - The user chose customer.
+2021-02-10 22:47:34 INFO  userService:42 - the user chose to create a new customer.
+2021-02-10 22:48:06 INFO  userService:68 - here the customer is prompted to choose which type of account they want.
+2021-02-10 22:48:18 INFO  userService:96 - here the customer is being put into the database.
+2021-02-10 22:48:19 INFO  userService:100 - here the list of customers in the database is being returned.
+2021-02-10 22:48:38 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:48:42 INFO  userService:115 - the user chose teller.
+2021-02-10 22:48:47 INFO  userService:123 - here the user chose to create a new teller. 
+2021-02-10 22:49:15 INFO  userService:154 - the teller is being put into the database.
+2021-02-10 22:49:16 INFO  userService:158 - here all tellers are being returned.
+2021-02-10 22:49:24 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:49:26 INFO  userService:174 - the user chose the bank admininstrator.
+2021-02-10 22:49:31 INFO  userService:181 - the user chose to create a new bank admin.
+2021-02-10 22:49:59 INFO  userService:212 - the bank admin is being inserted into the database.
+2021-02-10 22:49:59 INFO  userService:216 - all the bank admins are being returned.
+2021-02-10 22:50:10 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:50:16 INFO  userService:115 - the user chose teller.
+2021-02-10 22:51:10 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:51:25 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:51:29 INFO  userService:174 - the user chose the bank admininstrator.
+2021-02-10 22:51:32 INFO  userService:221 - the user chose to login.
+2021-02-10 22:51:43 INFO  userService:373 - the user logged in successfully.
+2021-02-10 22:51:47 INFO  userService:386 - the user chose to view all the customers.
+2021-02-10 22:52:41 INFO  userService:25 - This is the start of the registration method.
+2021-02-10 22:52:44 INFO  userService:36 - The user chose customer.
+2021-02-10 22:52:45 INFO  userService:105 - the user chose to login.
+2021-02-10 22:53:00 INFO  userService:255 - the user is successfully logged in. 
+2021-02-10 22:53:03 INFO  userService:277 - the user is making a deposit.
+2021-02-10 22:53:16 INFO  userService:237 - the user chose to end the program. 
